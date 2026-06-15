@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Weather Dashboard</title>
+</head>
+
+<body>
+    <script src="widget.js"></script>
+    <script>
+        const cities = [
+            { name: "Cancun", code: "21d16n86d85" },
+            { name: "Cairo", code: "30d0431d24" },
+            { name: "Mecca", code: "21d4339d83" },
+            { name: "Kitchener", code: "43d45n80d48" },
+            { name: "Dubai", code: "25d2055d27" },
+            { name: "Orlando", code: "28d54n81d38" }
+        ];
+
+        cities.forEach(city => buildWidget(city.name, city.code));
+    </script>
+</body>
+
+</html>
