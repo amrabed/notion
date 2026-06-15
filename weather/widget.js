@@ -3,22 +3,22 @@
  * This function creates the weather widget anchor tag and appends it to a specified target element.
  * It also ensures that the weatherwidget.io external script is loaded into the document only once.
  *
- * @param {string} cityName - The name of the city (e.g., "Orlando").
- * @param {string} cityCode - The location code for the widget (e.g., "28d54n81d38").
+ * @param {string} name - The name of the city (e.g., "Orlando"), read from `data-name`.
+ * @param {string} code - The location code for the widget (e.g., "28d54n81d38"), read from `data-code`.
  */
-function buildWidget(cityName, cityCode) {
+function buildWidget(name, code) {
     // Create body element if it doesn't exist yet to prevent 'appendChild' errors
     if (!document.body) {
         document.documentElement.appendChild(document.createElement('body'));
     }
 
-    const href = `https://forecast7.com/en/${cityCode}/${cityName.toLowerCase().replace(/\s+/g, '-')}/`;
-    const label1 = cityName.toUpperCase();
+    const href = `https://forecast7.com/en/${code}/${name.toLowerCase().replace(/\s+/g, '-')}/`;
+    const label1 = name.toUpperCase();
     const label2 = "WEATHER";
     const theme = "original";
 
     // Create the container div for the widget
-    const containerId = `${cityName.toLowerCase().replace(/\s+/g, '-')}-weather-widget-container`;
+    const containerId = `${name.toLowerCase().replace(/\s+/g, '-')}-weather-widget-container`;
     const containerDiv = document.createElement('div');
     containerDiv.id = containerId;
     document.body.appendChild(containerDiv);
@@ -50,3 +50,15 @@ function buildWidget(cityName, cityCode) {
         }
     }
 }
+
+// Auto-initialize if attributes are present on the script tag
+(function () {
+    const script = document.currentScript;
+    if (script) {
+        const name = script.dataset.name;
+        const code = script.dataset.code;
+        if (name && code) {
+            buildWidget(name, code);
+        }
+    }
+})();
