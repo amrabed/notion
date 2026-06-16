@@ -53,7 +53,7 @@ function buildWidget(name, code) {
 
     // Inject the weatherwidget.io script if it hasn't been injected yet
     // This script will scan the DOM for elements with class 'weatherwidget-io' and initialize them.
-    const scriptId = `${name}-weatherwidget-io-js`;
+    const scriptId = `weatherwidget-io-js`;
     if (!document.getElementById(scriptId)) {
         const script = document.createElement('script');
         script.id = scriptId;
